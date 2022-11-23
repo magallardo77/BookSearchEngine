@@ -43,9 +43,9 @@ const resolvers = {
             }
         },
 
-        deleteBook: async (parent, { email, password }) => {
+        deleteBook: async (parent, { email, password }, context) => {
             const updatedUser = await User.findOneAndDelete(
-                { _id: context.user._id},
+                { _id: context._id},
                 {$pull: {savedBooks: {bookId: URLSearchParams.bookId}}},
                 {new: true}
                 );
